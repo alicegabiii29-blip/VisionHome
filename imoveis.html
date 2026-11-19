@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imóveis | VisionHome</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.8/dist/lenis.min.js"></script>
+</head>
+<body class="site-page imoveis-page">
+  <header class="header">
+    <a href="index.html" class="marca">
+      <img src="IMAGENS2/logo.png" alt="VisionHome">
+      <span>Vision<span class="marca-destaque">Home</span></span>
+    </a>
+    <div class="header-acoes">
+      <a class="btn-entrar" href="index.html">Início</a>
+      <button class="menu-botao" id="menuBotao" onclick="alternarMenu()" aria-expanded="false">
+        <span>MENU</span><span class="menu-linhas"><i></i><i></i><i></i></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="menu-tela" id="menuTela">
+    <div class="menu-tela-conteudo">
+      <span class="menu-legenda">NAVEGUE PELA VISIONHOME</span>
+      <a href="index.html" onclick="fecharMenu()"><small>01</small> Início</a>
+      <a href="imoveis.html" onclick="fecharMenu()"><small>02</small> Imóveis</a>
+      <a href="personalizacao.html" onclick="fecharMenu()"><small>03</small> Personalização</a>
+      <a href="vivi.html" onclick="fecharMenu()"><small>04</small> Inteligência artificial</a>
+      <a href="anunciar.html" onclick="fecharMenu()"><small>05</small> Anunciar meu imóvel</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="page-intro">
+      <a class="page-back" href="index.html">← VOLTAR PARA INÍCIO</a>
+      <div class="page-intro-content" data-reveal>
+        <span class="subtitulo">ENCONTRE SEU PRÓXIMO ESPAÇO</span>
+        <h1>Um lugar para chamar de seu.</h1>
+        <p>Explore imóveis selecionados para diferentes momentos, estilos e planos de vida.</p>
+      </div>
+    </section>
+
+    <section class="page-body">
+      <div class="secao-topo" data-reveal>
+        <div>
+          <span class="subtitulo">CURADORIA VISIONHOME</span>
+          <h2>Escolha com calma.</h2>
+        </div>
+        <a class="btn-contorno" href="anunciar.html">Anunciar meu imóvel</a>
+      </div>
+
+      <div class="filtros" data-reveal>
+        <input id="pesquisaImovel" type="search" placeholder="Busque por nome ou localização..." oninput="filtrarImoveis()">
+        <select id="filtroTipo" onchange="filtrarImoveis()">
+          <option value="todos">Todos os tipos</option>
+          <option value="casa">Casa</option>
+          <option value="apartamento">Apartamento</option>
+          <option value="terreno">Terreno</option>
+          <option value="comercial">Comercial</option>
+          <option value="chacara">Chácara</option>
+        </select>
+        <select id="filtroNegocio" onchange="filtrarImoveis()">
+          <option value="todos">Venda e aluguel</option>
+          <option value="venda">Venda</option>
+          <option value="aluguel">Aluguel</option>
+        </select>
+      </div>
+
+      <div class="imoveis-grid" id="listaImoveis">
+      </div>
+      <p class="sem-resultados" id="semResultados">Carregando imóveis...</p>
+    </section>
+  </main>
+
+  <div class="modal" id="modalDetalhes" onclick="fecharAoFora(event)">
+    <div class="modal-caixa modal-conta">
+      <button class="fechar" onclick="fecharModal()">×</button>
+      <span class="subtitulo" id="detalheLocal"></span>
+      <h2 id="detalheNome"></h2>
+      <h3 id="detalhePreco"></h3>
+      <p id="detalheDescricao"></p>
+      <a class="btn-principal" href="index.html">Tenho interesse</a>
+    </div>
+  </div>
+
+  <footer class="footer"><div class="footer-logo-area"><img src="IMAGENS2/logo.png" alt="Logo VisionHome"></div><div class="footer-links"><a href="index.html">Início</a><a href="personalizacao.html">Personalização</a><a href="vivi.html">Vivi</a><a href="anunciar.html">Anunciar</a></div><small>© 2026 VisionHome. Todos os direitos reservados.</small></footer>
+
+  <script src="site.js"></script>
+  <script>
+    function formatarPreco(valor, finalidade) {
+      const preco = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor);
+      return finalidade === 'aluguel' ? `${preco}/mês` : preco;
+    }
+
+    function criarCardImovel(imovel) {
+      const card = document.createElement('article');
+      card.className = 'imovel-card';
+      card.dataset.nome = imovel.title;
+      card.dataset.local = `${imovel.city} ${imovel.state}`;
+      card.dataset.tipo = imovel.type;
+      card.dataset.negocio = imovel.purpose;
+      card.dataset.preco = formatarPreco(imovel.price, imovel.purpose);
+      card.dataset.descricao = imovel.description;
+
+      const foto = document.createElement('div');
+      foto.className = 'imovel-foto';
+      const imagem = document.createElement('img');
+      imagem.src = imovel.image || (imovel.type === 'apartamento'
+        ? 'IMAGENS2/apartamento-brisa.jpg'
+        : 'IMAGENS2/casa-serena.jpg');
+      imagem.alt = imovel.title;
+      const finalidade = document.createElement('span');
+      finalidade.textContent = imovel.purpose === 'aluguel' ? 'ALUGUEL' : 'VENDA';
+      foto.append(imagem, finalidade);
+
+      const dados = document.createElement('div');
+      dados.className = 'imovel-dados';
+      const local = document.createElement('small');
+      local.textContent = `${imovel.city} · ${imovel.state}`;
+      const titulo = document.createElement('h3');
+      titulo.textContent = imovel.title;
+      const caracteristicas = document.createElement('p');
+      caracteristicas.textContent =
+        `${imovel.bedrooms} quartos · ${imovel.bathrooms} banheiros · ${imovel.parkingSpaces} vagas`;
+      const rodape = document.createElement('div');
+      rodape.className = 'imovel-rodape';
+      const preco = document.createElement('strong');
+      preco.textContent = card.dataset.preco;
+      const botao = document.createElement('button');
+      botao.type = 'button';
+      botao.textContent = 'Ver detalhes →';
+      botao.addEventListener('click', () => abrirDetalhes(botao));
+      rodape.append(preco, botao);
+      dados.append(local, titulo, caracteristicas, rodape);
+      card.append(foto, dados);
+      return card;
+    }
+
+    function filtrarImoveis() {
+      const busca = document.getElementById('pesquisaImovel').value.trim().toLowerCase();
+      const tipo = document.getElementById('filtroTipo').value;
+      const negocio = document.getElementById('filtroNegocio').value;
+      let encontrados = 0;
+
+      document.querySelectorAll('#listaImoveis .imovel-card').forEach(card => {
+        const texto = `${card.dataset.nome} ${card.dataset.local}`.toLowerCase();
+        const visivel = texto.includes(busca) &&
+          (tipo === 'todos' || card.dataset.tipo === tipo) &&
+          (negocio === 'todos' || card.dataset.negocio === negocio);
+        card.style.display = visivel ? '' : 'none';
+        if (visivel) encontrados++;
+      });
+
+      const aviso = document.getElementById('semResultados');
+      aviso.textContent = 'Nenhum imóvel encontrado com esses filtros.';
+      aviso.style.display = encontrados ? 'none' : 'block';
+    }
+
+    async function carregarImoveis() {
+      const aviso = document.getElementById('semResultados');
+      try {
+        const resposta = await fetch('/api/properties');
+        const dados = await resposta.json();
+        if (!resposta.ok) throw new Error(dados.error || 'Não foi possível carregar os imóveis.');
+        document.getElementById('listaImoveis').replaceChildren(...dados.map(criarCardImovel));
+        filtrarImoveis();
+      } catch (erro) {
+        aviso.textContent = `Não foi possível carregar os imóveis: ${erro.message}`;
+        aviso.style.display = 'block';
+      }
+    }
+
+    function abrirDetalhes(botao) {
+      const card = botao.closest('.imovel-card');
+      document.getElementById('detalheLocal').textContent = card.dataset.local;
+      document.getElementById('detalheNome').textContent = card.dataset.nome;
+      document.getElementById('detalhePreco').textContent = card.dataset.preco;
+      document.getElementById('detalheDescricao').textContent = card.dataset.descricao;
+      document.getElementById('modalDetalhes').classList.add('ativo');
+    }
+
+    function fecharModal() { document.getElementById('modalDetalhes').classList.remove('ativo'); }
+    function fecharAoFora(event) { if (event.target.id === 'modalDetalhes') fecharModal(); }
+
+    carregarImoveis();
+  </script>
+</body>
+</html>

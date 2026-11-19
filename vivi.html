@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vivi | VisionHome</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.8/dist/lenis.min.js"></script>
+</head>
+<body class="site-page vivi-page">
+  <header class="header"><a href="index.html" class="marca"><img src="IMAGENS2/logo.png" alt="VisionHome"><span>Vision<span class="marca-destaque">Home</span></span></a><div class="header-acoes"><a class="btn-entrar" href="index.html">Início</a><button class="menu-botao" id="menuBotao" onclick="alternarMenu()" aria-expanded="false"><span>MENU</span><span class="menu-linhas"><i></i><i></i><i></i></span></button></div></header>
+  <nav class="menu-tela" id="menuTela"><div class="menu-tela-conteudo"><span class="menu-legenda">NAVEGUE PELA VISIONHOME</span><a href="index.html" onclick="fecharMenu()"><small>01</small> Início</a><a href="imoveis.html" onclick="fecharMenu()"><small>02</small> Imóveis</a><a href="personalizacao.html" onclick="fecharMenu()"><small>03</small> Personalização</a><a href="vivi.html" onclick="fecharMenu()"><small>04</small> Inteligência artificial</a><a href="anunciar.html" onclick="fecharMenu()"><small>05</small> Anunciar meu imóvel</a></div></nav>
+
+  <main>
+    <section class="page-intro"><a class="page-back" href="index.html">← VOLTAR PARA INÍCIO</a><div class="page-intro-content" data-reveal><span class="subtitulo">ASSISTENTE VISIONHOME</span><h1>Ideias que conversam com você.</h1><p>Conte o que você imagina. A Vivi ajuda a organizar referências, possibilidades e próximos passos.</p></div></section>
+    <section class="page-body"><div class="vivi-layout"><div data-reveal><span class="subtitulo">CONVERSE COM A VIVI</span><h2>Suas ideias podem ir <em>mais longe.</em></h2><p>Experimente perguntar sobre cores, iluminação, móveis, organização ou como aproveitar melhor um espaço pequeno.</p></div><div class="chat" data-reveal><div class="chat-topo"><div class="ia-avatar">V</div><div><strong>Olá, sou a Vivi! assistente da VisionHome.</strong><small>Pronta para imaginar com você</small></div><span class="online"></span></div><div class="chat-mensagens" id="chatMensagens"><div class="mensagem ia-mensagem">Olá! Me conte qual ambiente você quer transformar.</div></div><div class="chat-escrever"><input id="mensagemUsuario" type="text" placeholder="Digite sua mensagem..." onkeydown="if(event.key === 'Enter') enviarMensagem()"><button onclick="enviarMensagem()">Enviar ↑</button></div></div></div></section>
+  </main>
+
+  <footer class="footer"><div class="footer-logo-area"><img src="IMAGENS2/logo.png" alt="Logo VisionHome"></div><div class="footer-links"><a href="index.html">Início</a><a href="imoveis.html">Imóveis</a><a href="personalizacao.html">Personalização</a><a href="anunciar.html">Anunciar</a></div><small>© 2026 VisionHome. Todos os direitos reservados.</small></footer>
+  <script src="site.js"></script>
+  <script>
+    function adicionarMensagem(texto, classe) {
+      const item = document.createElement('div');
+      item.className = `mensagem ${classe}`;
+      item.textContent = texto;
+      const mensagens = document.getElementById('chatMensagens');
+      mensagens.appendChild(item);
+      mensagens.scrollTop = mensagens.scrollHeight;
+    }
+
+    function enviarMensagem() {
+      const campo = document.getElementById('mensagemUsuario');
+      const mensagem = campo.value.trim();
+      if (!mensagem) return;
+      adicionarMensagem(mensagem, 'usuario-mensagem');
+      campo.value = '';
+      setTimeout(() => {
+        const texto = mensagem.toLowerCase();
+        let resposta = 'Comece escolhendo uma sensação: acolhedor, leve, vibrante ou tranquilo. A partir daí, podemos montar uma direção para o ambiente.';
+        if (texto.includes('sala')) resposta = 'Para uma sala aconchegante, experimente tons neutros, iluminação indireta e uma peça de destaque com textura.';
+        if (texto.includes('quarto')) resposta = 'No quarto, uma paleta tranquila, iluminação confortável e tecidos macios ajudam a criar um ambiente acolhedor.';
+        if (texto.includes('cozinha')) resposta = 'Na cozinha, pense primeiro na circulação. Depois, use iluminação e organização para deixar a rotina mais fluida.';
+        if (texto.includes('cor')) resposta = 'Você pode escolher uma cor principal e equilibrá-la com tons neutros. Azul suave, bege e terracota formam uma combinação harmoniosa.';
+        adicionarMensagem(resposta, 'ia-mensagem');
+      }, 600);
+    }
+  </script>
+</body>
+</html>

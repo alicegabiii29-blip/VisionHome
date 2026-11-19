@@ -1,0 +1,1362 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VisionHome</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.8/dist/lenis.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="dashboard-page">
+
+<aside class="dashboard-sidebar" id="dashboardSidebar">
+  <div class="sidebar-brand">
+    <a href="index.html" aria-label="VisionHome - visão geral">
+      <img src="IMAGENS2/logo.png" alt="">
+      <span>Vision<span>Home</span></span>
+    </a>
+    <button class="sidebar-close" type="button" onclick="alternarSidebar()" aria-label="Fechar menu">×</button>
+  </div>
+
+  <nav class="sidebar-nav" aria-label="Navegação principal">
+    <span class="sidebar-label">PAINEL</span>
+    <a class="sidebar-link ativo" href="index.html"><i>⌂</i><span>Visão geral</span></a>
+    <a class="sidebar-link" href="imoveis.html"><i>⌕</i><span>Explorar imóveis</span></a>
+    <a class="sidebar-link" href="personalizacao.html"><i>✦</i><span>Personalizar espaço</span></a>
+    <a class="sidebar-link" href="vivi.html"><i>◌</i><span>Falar com a Vivi</span></a>
+
+    <span class="sidebar-label sidebar-label-second">MINHA ÁREA</span>
+    <a class="sidebar-link" href="anunciar.html"><i>⌂</i><span>Anunciar imóvel</span></a>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <span class="sidebar-status"><i></i> VisionHome online</span>
+    <a class="sidebar-profile" href="index.html?auth=login"><span class="sidebar-avatar">VH</span><span><b>Minha conta</b><small>Entrar ou cadastrar</small></span><strong>→</strong></a>
+  </div>
+</aside>
+<div class="sidebar-backdrop" onclick="alternarSidebar()"></div>
+
+<header class="header">
+  <a href="#inicio" class="marca">
+    <img src="IMAGENS2/logo.png" alt="VisionHome">
+    <span>Vision<span class="marca-destaque">Home</span></span>
+  </a>
+
+  <div class="header-acoes">
+    <button class="btn-entrar" onclick="abrirModal('modalLogin')">
+      Entrar / Cadastrar
+    </button>
+
+    <button class="menu-botao" id="menuBotao" onclick="alternarSidebar()" aria-expanded="false">
+      <span>MENU</span>
+      <span class="menu-linhas"><i></i><i></i><i></i></span>
+    </button>
+  </div>
+</header>
+
+<nav class="menu-tela" id="menuTela">
+  <div class="menu-tela-conteudo">
+    <span class="menu-legenda">NAVEGUE PELA VISIONHOME</span>
+
+    <a href="#inicio" onclick="fecharMenu()"><small>01</small> Início</a>
+    <a href="imoveis.html" onclick="fecharMenu()"><small>02</small> Imóveis</a>
+    <a href="personalizacao.html" onclick="fecharMenu()"><small>03</small> Personalização</a>
+    <a href="vivi.html" onclick="fecharMenu()"><small>04</small> Inteligência artificial</a>
+    <a href="anunciar.html" onclick="fecharMenu()"><small>05</small> Anunciar meu imóvel</a>
+  </div>
+</nav>
+
+<main>
+
+  <section class="dashboard-overview" aria-labelledby="dashboardTitulo">
+    <div class="dashboard-heading" data-reveal>
+      <div>
+        <span class="subtitulo">VISÃO GERAL</span>
+        <h1 id="dashboardTitulo">Bem-vindo ao seu espaço.</h1>
+        <p>Encontre, imagine e transforme seu próximo lar a partir de um só lugar.</p>
+      </div>
+      <span class="dashboard-date">VISIONHOME / 2026</span>
+    </div>
+
+    <div class="dashboard-grid">
+      <a class="dashboard-feature" href="imoveis.html" data-reveal>
+        <img src="IMAGENS2/hero.jpg" alt="Ambiente de uma casa contemporânea">
+        <span class="dashboard-feature-overlay"></span>
+        <div class="dashboard-feature-content">
+          <span class="dashboard-kicker">PRÓXIMO PASSO</span>
+          <h2>Encontre um espaço que acompanhe seus planos.</h2>
+          <span class="dashboard-action">Explorar imóveis <b>→</b></span>
+        </div>
+      </a>
+
+      <div class="dashboard-quick-grid">
+        <a class="dashboard-quick dashboard-quick-terra" href="personalizacao.html" data-reveal>
+          <span class="dashboard-quick-number">01</span><i>✦</i><h3>Personalizar</h3><p>Veja o potencial de cada ambiente.</p><b>→</b>
+        </a>
+        <a class="dashboard-quick dashboard-quick-blue" href="vivi.html" data-reveal>
+          <span class="dashboard-quick-number">02</span><i>◌</i><h3>Falar com a Vivi</h3><p>Organize suas ideias com ajuda.</p><b>→</b>
+        </a>
+        <a class="dashboard-quick dashboard-quick-light" href="anunciar.html" data-reveal>
+          <span class="dashboard-quick-number">03</span><i>⌂</i><h3>Anunciar imóvel</h3><p>Apresente seu espaço.</p><b>→</b>
+        </a>
+      </div>
+    </div>
+
+    <div class="dashboard-footer-row" data-reveal>
+      <span><i></i> Tudo em um só lugar</span>
+      <p>Escolha uma opção no menu para continuar sua jornada pela VisionHome.</p>
+    </div>
+  </section>
+
+  <section class="hero" id="inicio">
+
+    <img
+      src="IMAGENS2/hero.jpg"
+      alt="Imagem principal da VisionHome"
+      class="hero-fundo"
+    >
+
+    <div class="hero-formas" aria-hidden="true">
+      <span class="hero-forma hero-forma-um"></span>
+      <span class="hero-forma hero-forma-dois"></span>
+      <span class="hero-forma hero-forma-tres"></span>
+    </div>
+
+    <div class="hero-conteudo">
+      <span class="hero-etiqueta">ENCONTRE O LUGAR PARA VIVER SUAS IDEIAS</span>
+      <h1>
+        Visualize, personalize e viva o
+        <em>futuro dos imóveis.</em>
+      </h1>
+
+      <div class="hero-botoes">
+        <a class="btn-principal" href="imoveis.html">Explorar imóveis</a>
+        <a class="btn-secundario" href="personalizacao.html">Personalizar ambiente</a>
+      </div>
+    </div>
+
+    <a class="hero-scroll" href="imoveis.html" aria-label="Explorar a página">
+      <span>ROLE PARA EXPLORAR</span>
+      <i></i>
+    </a>
+  </section>
+
+  <section class="home-hub" aria-labelledby="hub-titulo">
+    <div class="hub-heading" data-reveal>
+      <span class="subtitulo">O QUE VOCÊ PROCURA?</span>
+      <h2 id="hub-titulo">Um próximo passo para cada ideia de lar.</h2>
+      <p>Explore a VisionHome do seu jeito. Escolha um caminho e comece a imaginar.</p>
+    </div>
+
+    <div class="hub-grid">
+      <a class="hub-card hub-card-principal" href="imoveis.html" data-reveal>
+        <span class="hub-number">01</span>
+        <div>
+          <span class="hub-icon">↗</span>
+          <h3>Encontrar um imóvel</h3>
+          <p>Busque espaços que combinam com a sua próxima fase.</p>
+          <span class="hub-link">Explorar imóveis <b>→</b></span>
+        </div>
+      </a>
+
+      <a class="hub-card" href="personalizacao.html" data-reveal>
+        <span class="hub-number">02</span>
+        <div>
+          <span class="hub-icon">✦</span>
+          <h3>Personalizar um espaço</h3>
+          <p>Veja possibilidades, estilos e novas formas de viver.</p>
+          <span class="hub-link">Ver inspirações <b>→</b></span>
+        </div>
+      </a>
+
+      <a class="hub-card" href="vivi.html" data-reveal>
+        <span class="hub-number">03</span>
+        <div>
+          <span class="hub-icon">◌</span>
+          <h3>Conversar com a Vivi</h3>
+          <p>Encontre ideias para transformar ambientes com mais intenção.</p>
+          <span class="hub-link">Falar com a Vivi <b>→</b></span>
+        </div>
+      </a>
+
+      <a class="hub-card hub-card-wide" href="anunciar.html" data-reveal>
+        <span class="hub-number">04</span>
+        <div>
+          <span class="hub-icon">⌂</span>
+          <h3>Anunciar meu imóvel</h3>
+          <p>Apresente seu espaço e deixe que ele encontre novas possibilidades.</p>
+          <span class="hub-link">Começar anúncio <b>→</b></span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="introducao" data-reveal>
+    <div>
+      <span class="subtitulo">SOBRE A VISIONHOME</span>
+
+      <h2>
+        Mais do que encontrar um imóvel.
+        <em>Imagine o que ele pode se tornar.</em>
+      </h2>
+    </div>
+
+    <p>
+      A VisionHome é uma plataforma criada para tornar a experiência de encontrar, 
+      planejar e transformar um imóvel mais simples e prática. 
+      Nosso objetivo é ajudar pessoas a visualizarem o potencial de cada espaço, 
+      oferecendo ferramentas que facilitam a busca por imóveis,
+      a organização de ideias e o planejamento de ambientes. 
+      Mais do que encontrar uma casa, queremos ajudar você a 
+      imaginar todas as possibilidades de um novo lar!
+    </p>
+  </section>
+
+  <section class="secao imoveis-secao" id="imoveis" data-reveal>
+
+    <div class="secao-topo">
+      <div>
+        <span class="subtitulo">ENCONTRE SEU ESPAÇO</span>
+        <h2>Explore imóveis</h2>
+      </div>
+
+      <button class="btn-contorno" onclick="abrirFormularioAnuncio()">
+        Anunciar meu imóvel
+      </button>
+    </div>
+
+    <div class="filtros">
+      <input
+        id="pesquisaImovel"
+        type="search"
+        placeholder="Busque por nome, tipo ou localização..."
+        oninput="filtrarImoveis()"
+      >
+
+      <select id="filtroTipo" onchange="filtrarImoveis()">
+        <option value="todos">Todos os tipos</option>
+        <option value="casa">Casa</option>
+        <option value="apartamento">Apartamento</option>
+      </select>
+
+      <select id="filtroNegocio" onchange="filtrarImoveis()">
+        <option value="todos">Venda e aluguel</option>
+        <option value="venda">Venda</option>
+        <option value="aluguel">Aluguel</option>
+      </select>
+    </div>
+
+    <div class="imoveis-grid" id="listaImoveis">
+
+      <article class="imovel-card"
+        data-nome="Casa Horizonte"
+        data-local="Rio de Janeiro - Rio de Janeiro"
+        data-tipo="casa"
+        data-negocio="venda"
+        data-preco="R$ 650.000"
+        data-quartos="3"
+        data-banheiros="2"
+        data-vagas="2"
+        data-area="180 m²"
+        data-descricao="Casa contemporânea com ambientes amplos, iluminação natural e uma área externa perfeita para aproveitar bons momentos.">
+
+        <div class="imovel-foto">
+          <img
+            src="https://i.pinimg.com/736x/48/9d/53/489d53c56a9795c9cdf169e598445499.jpg"
+            alt="Casa Horizonte"
+          >
+          <span>VENDA</span>
+        </div>
+
+        <div class="imovel-dados">
+          <small>Rio de Janeiro - RJ</small>
+          <h3>Casa Horizonte</h3>
+          <p>3 quartos · 2 banheiros · 2 vagas</p>
+
+          <div class="imovel-rodape">
+            <strong>R$ 650.000</strong>
+            <button onclick="abrirDetalhes(this)">Ver detalhes ↗</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="imovel-card"
+        data-nome="Apartamento Aurora"
+        data-local="Garulho - São Paulo"
+        data-tipo="apartamento"
+        data-negocio="venda"
+        data-preco="R$ 420.000"
+        data-quartos="2"
+        data-banheiros="2"
+        data-vagas="1"
+        data-area="92 m²"
+        data-descricao="Apartamento elegante com varanda, ambientes integrados e localização prática para a rotina.">
+
+        <div class="imovel-foto">
+          <img
+            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85"
+            alt="Apartamento Aurora"
+          >
+          <span>VENDA</span>
+        </div>
+
+        <div class="imovel-dados">
+          <small>Garulhos - SP</small>
+          <h3>Apartamento Aurora</h3>
+          <p>2 quartos · 2 banheiros · 1 vaga</p>
+
+          <div class="imovel-rodape">
+            <strong>R$ 420.000</strong>
+            <button onclick="abrirDetalhes(this)">Ver detalhes ↗</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="imovel-card"
+        data-nome="Casa Serena"
+        data-local="João Pessoa - PB"
+        data-tipo="casa"
+        data-negocio="venda"
+        data-preco="R$ 780.000"
+        data-quartos="4"
+        data-banheiros="3"
+        data-vagas="2"
+        data-area="240 m²"
+        data-descricao="Casa com arquitetura contemporânea, jardim, espaços integrados e excelente iluminação natural.">
+
+        <div class="imovel-foto">
+          <img src="IMAGENS2/casa-serena.jpg" alt="Casa Serena">
+          <span>VENDA</span>
+        </div>
+
+        <div class="imovel-dados">
+          <small>João Pessoa - PB</small>
+          <h3>Casa Serena</h3>
+          <p>4 quartos · 3 banheiros · 2 vagas</p>
+
+          <div class="imovel-rodape">
+            <strong>R$ 780.000</strong>
+            <button onclick="abrirDetalhes(this)">Ver detalhes ↗</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="imovel-card"
+        data-nome="Apartamento Brisa"
+        data-local="Niterói - RJ"
+        data-tipo="apartamento"
+        data-negocio="aluguel"
+        data-preco="R$ 2.300/mês"
+        data-quartos="2"
+        data-banheiros="1"
+        data-vagas="1"
+        data-area="75 m²"
+        data-descricao="Apartamento funcional, bem iluminado e com espaços confortáveis para o dia a dia.">
+
+        <div class="imovel-foto">
+          <img src="IMAGENS2/apartamento-brisa.jpg" alt="Apartamento Brisa">
+          <span>ALUGUEL</span>
+        </div>
+
+        <div class="imovel-dados">
+          <small>Niterói - RJ</small>
+          <h3>Apartamento Brisa</h3>
+          <p>2 quartos · 1 banheiro · 1 vaga</p>
+
+          <div class="imovel-rodape">
+            <strong>R$ 2.300/mês</strong>
+            <button onclick="abrirDetalhes(this)">Ver detalhes ↗</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="imovel-card"
+        data-nome="Casa Alameda"
+        data-local="Gramado - RS"
+        data-tipo="casa"
+        data-negocio="venda"
+        data-preco="R$ 510.000"
+        data-quartos="3"
+        data-banheiros="2"
+        data-vagas="2"
+        data-area="150 m²"
+        data-descricao="Casa acolhedora com quintal, boa distribuição dos cômodos e acabamento contemporâneo.">
+
+        <div class="imovel-foto">
+          <img
+            src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1000&q=85"
+            alt="Casa Alameda"
+          >
+          <span>VENDA</span>
+        </div>
+
+        <div class="imovel-dados">
+          <small>Gramado - RS</small>
+          <h3>Casa Alameda</h3>
+          <p>3 quartos · 2 banheiros · 2 vagas</p>
+
+          <div class="imovel-rodape">
+            <strong>R$ 510.000</strong>
+            <button onclick="abrirDetalhes(this)">Ver detalhes ↗</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="imovel-card"
+        data-nome="Apartamento Vista"
+        data-local="São Paulo - São Paulo"
+        data-tipo="apartamento"
+        data-negocio="aluguel"
+        data-preco="R$ 3.100/mês"
+        data-quartos="3"
+        data-banheiros="2"
+        data-vagas="1"
+        data-area="110 m²"
+        data-descricao="Apartamento amplo com varanda e vista aberta, ideal para quem procura conforto e praticidade.">
+
+        <div class="imovel-foto">
+          <img
+            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=85"
+            alt="Apartamento Vista"
+          >
+          <span>ALUGUEL</span>
+        </div>
+
+        <div class="imovel-dados">
+          <small>São Paulo - SP</small>
+          <h3>Apartamento Vista</h3>
+          <p>3 quartos · 2 banheiros · 1 vaga</p>
+
+          <div class="imovel-rodape">
+            <strong>R$ 3.100/mês</strong>
+            <button onclick="abrirDetalhes(this)">Ver detalhes ↗</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="sem-resultados" id="semResultados">
+      Nenhum imóvel encontrado com esses filtros.
+    </p>
+  </section>
+
+
+  <section class="secao personalizacao" id="personalizacao" data-reveal>
+
+    <div class="secao-topo">
+      <div>
+        <span class="subtitulo">TRANSFORME SEU ESPAÇO</span>
+        <h2>Personalização</h2>
+        <p>Visualize possibilidades e transforme ambientes de acordo com suas ideias.</p>
+      </div>
+    </div>
+
+    <div class="personalizacao-grid">
+
+      <article class="personalizacao-card">
+        <img
+          src="https://i.pinimg.com/1200x/96/f0/9b/96f09b2d06283fcefc3e2dcf86aaedbf.jpg"
+          alt="Sala decorada"
+        >
+
+        <div>
+          <span>01</span>
+          <h3>Decoração e design</h3>
+          <p>Escolha móveis, cores e elementos para imaginar seu ambiente ideal.</p>
+          <button onclick="mostrarAviso('Decoração e design')">Explorar ferramenta ↗</button>
+        </div>
+      </article>
+
+      <article class="personalizacao-card">
+        <img
+          src="https://i.pinimg.com/736x/13/46/b6/1346b64990a81a00fdbf017354fc0d3a.jpg"
+          alt="Ambiente moderno"
+        >
+
+        <div>
+          <span>02</span>
+          <h3>Realidade aumentada</h3>
+          <p>Conheça a proposta de visualizar elementos e móveis no próprio espaço.</p>
+          <button onclick="mostrarAviso('Realidade aumentada')">Conhecer tecnologia ↗</button>
+        </div>
+      </article>
+
+      <article class="personalizacao-card">
+        <img
+          src="https://i.pinimg.com/736x/85/8b/78/858b78335db86976ae630af2edfc3e03.jpg"
+          alt="Sala contemporânea"
+        >
+
+        <div>
+          <span>03</span>
+          <h3>Realidade virtual</h3>
+          <p>Imagine uma experiência imersiva para conhecer ambientes e projetos.</p>
+          <button onclick="mostrarAviso('Realidade virtual')">Conhecer tecnologia ↗</button>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="faixa-personalizacao">
+      <div>
+        <h2>Um espaço. Infinitas possibilidades.</h2>
+        <p>Explore novas formas de visualizar e planejar o ambiente que você deseja.</p>
+      </div>
+
+      <a href="#ia" class="btn-principal">Conhecer VIVI.</a>
+    </div>
+
+  </section>
+
+  <section class="secao ia-secao" id="ia" data-reveal>
+
+    <div class="ia-texto">
+      <h2>Suas ideias podem ir <em>mais longe.</em></h2>
+      <p>
+        Converse com nossa assistente e descubra sugestões para decoração,
+        organização e aproveitamento de espaços.
+      </p>
+    </div>
+
+    <div class="chat">
+
+      <div class="chat-topo">
+        <div class="ia-avatar">
+        </div>
+
+        <div>
+          <strong>Olá, sou a Vivi! assistende IA do VisionHome.</strong>
+        </div>
+
+        <span class="online"></span>
+      </div>
+
+      <div class="chat-mensagens" id="chatMensagens">
+        <div class="mensagem ia-mensagem">
+          Olá! Sou a Vivi! assistente da VisionHome. Como posso ajudar você a transformar seu espaço?
+        </div>
+      </div>
+
+      <div class="chat-escrever">
+        <input
+          id="mensagemUsuario"
+          type="text"
+          placeholder="Digite sua mensagem..."
+          onkeydown="if(event.key==='Enter') enviarMensagem()"
+        >
+
+        <button onclick="enviarMensagem()">Enviar ↑</button>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="secao anunciar-secao" id="meus-imoveis" data-reveal>
+
+    <div class="anunciar-cabecalho">
+      <span class="subtitulo">SUA ÁREA NA VISIONHOME</span>
+      <h2>Anuncie seu imóvel</h2>
+      
+    </div>
+
+    <div class="anunciar-layout">
+
+      <div class="anuncio-convite" id="anuncioConvite">
+        <div class="anuncio-ilustracao" aria-hidden="true">
+          <span></span><span></span><span></span>
+          <b>⌂</b>
+        </div>
+        <span class="subtitulo">PRONTO PARA COMEÇAR?</span>
+        <h3>Transforme seu imóvel em uma nova possibilidade.</h3>
+        <p>Conte um pouco sobre o espaço, escolha uma foto e publique sua apresentação.</p>
+        <button class="btn-principal" type="button" onclick="abrirFormularioAnuncio(true)">
+          Começar meu anúncio <span aria-hidden="true">→</span>
+        </button>
+      </div>
+
+      <form class="form-anuncio" id="formAnuncio" hidden>
+
+        <div class="form-linha">
+          <label>
+            Nome do imóvel
+            <input id="anuncioNome" required placeholder="Ex.: Casa com jardim">
+          </label>
+
+          <label>
+            Cidade
+            <input id="anuncioCidade" required maxlength="100" placeholder="Ex.: Caruaru">
+          </label>
+        </div>
+
+        <div class="form-linha">
+          <label>
+            Estado (UF)
+            <input id="anuncioEstado" required maxlength="2" pattern="[A-Za-z]{2}" placeholder="Ex.: PE">
+          </label>
+
+          <label>
+            CEP
+            <input id="anuncioCep" required maxlength="10" placeholder="Ex.: 55000-000">
+          </label>
+        </div>
+
+        <div class="form-linha">
+          <label>
+            Endereço
+            <input id="anuncioEndereco" required maxlength="255" placeholder="Rua ou avenida">
+          </label>
+
+          <label>
+            Número
+            <input id="anuncioNumero" maxlength="20" placeholder="Ex.: 100">
+          </label>
+        </div>
+
+        <div class="form-linha">
+          <label>
+            Bairro
+            <input id="anuncioBairro" required maxlength="100" placeholder="Ex.: Universitário">
+          </label>
+
+          <label>
+            Tipo de imóvel
+            <select id="anuncioTipo">
+              <option value="casa">Casa</option>
+              <option value="apartamento">Apartamento</option>
+              <option value="terreno">Terreno</option>
+              <option value="comercial">Comercial</option>
+              <option value="chacara">Chácara</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-linha">
+          <label>
+            Finalidade
+            <select id="anuncioNegocio">
+              <option value="venda">Venda</option>
+              <option value="aluguel">Aluguel</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-linha tres">
+          <label>
+            Preço
+            <input id="anuncioPreco" type="number" min="0.01" step="0.01" required placeholder="Ex.: 500000">
+          </label>
+
+          <label>
+            Quartos
+            <input id="anuncioQuartos" type="number" min="0" value="2">
+          </label>
+
+          <label>
+            Banheiros
+            <input id="anuncioBanheiros" type="number" min="0" value="1">
+          </label>
+        </div>
+
+        <div class="form-linha">
+          <label>
+            Vagas de garagem
+            <input id="anuncioVagas" type="number" min="0" value="1">
+          </label>
+
+          <label>
+            Área (m²)
+            <input id="anuncioArea" type="number" min="0.01" step="0.01" required placeholder="Ex.: 120">
+          </label>
+        </div>
+
+        <label class="campo-largo">
+          Descrição
+          <textarea id="anuncioDescricao" rows="4" required placeholder="Conte um pouco sobre o imóvel..."></textarea>
+        </label>
+
+        <label class="campo-largo">
+          Foto do imóvel
+          <input id="anuncioFoto" type="file" accept="image/jpeg,image/png,image/webp" onchange="preverFoto(event)">
+        </label>
+
+        <div class="foto-preview" id="fotoPreview">
+          <span>A prévia da foto aparecerá aqui</span>
+        </div>
+
+        <button class="btn-principal enviar-anuncio" type="submit">
+          Publicar imóvel
+        </button>
+
+        <p class="nota-form">
+          Seu anúncio será salvo no banco de dados e ficará disponível na busca de imóveis.
+        </p>
+
+      </form>
+
+      <aside class="anunciar-info">
+        <div class="mini-casa">⌂</div>
+
+        <h3>Seu imóvel merece ser visto.</h3>
+
+        <p>
+          Apresente os detalhes do espaço e ajude outras pessoas
+          a encontrarem um lugar que combine com seus planos.
+        </p>
+
+        <ul>
+          <li>Informações organizadas</li>
+          <li>Foto de apresentação</li>
+          <li>Características do imóvel</li>
+        </ul>
+
+        <button class="btn-secundario anuncio-atalho" type="button" onclick="abrirFormularioAnuncio(true)">
+          Abrir formulário
+        </button>
+      </aside>
+
+    </div>
+
+    <div class="anuncios-publicados">
+      <h3>Seus anúncios publicados</h3>
+
+      <div id="listaAnuncios">
+        <p class="vazio-anuncios">Você ainda não publicou nenhum imóvel.</p>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="footer">
+
+  <div class="footer-logo-area">
+    <img src="IMAGENS2/logo.png" alt="Logo VisionHome">
+  </div>
+
+  <div class="footer-links">
+    <a href="index.html">Início</a>
+    <a href="imoveis.html">Imóveis</a>
+    <a href="personalizacao.html">Personalização</a>
+    <a href="vivi.html">IA / Vivi</a>
+    <a href="anunciar.html">Anunciar</a>
+  </div>
+
+  <small>© 2026 VisionHome. Todos os direitos reservados.</small>
+
+</footer>
+
+<div class="modal" id="modalDetalhes" onclick="fecharAoFora(event,'modalDetalhes')">
+
+  <div class="modal-caixa modal-detalhe">
+    <button class="fechar" onclick="fecharModal('modalDetalhes')">×</button>
+
+    <img id="detalheImagem" src="" alt="Foto do imóvel">
+
+    <div class="modal-detalhe-texto">
+      <span class="subtitulo" id="detalheLocal"></span>
+      <h2 id="detalheNome"></h2>
+      <h3 id="detalhePreco"></h3>
+
+      <div class="detalhe-caracteristicas" id="detalheCaracteristicas"></div>
+
+      <p id="detalheDescricao"></p>
+
+      <button class="btn-principal" onclick="mostrarAviso('Contato com o anunciante')">
+        Tenho interesse
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal" id="modalLogin" onclick="fecharAoFora(event,'modalLogin')">
+
+  <div class="modal-caixa modal-conta">
+    <button class="fechar" onclick="fecharModal('modalLogin')">×</button>
+
+    <span class="subtitulo">BEM-VINDO À VISIONHOME</span>
+    <h2>Entre na sua conta</h2>
+
+    <input type="text" id="emailLogin" autocomplete="username" placeholder="Seu usuário ou e-mail">
+    <input type="password" id="senhaLogin" autocomplete="current-password" placeholder="Sua senha">
+
+    <button class="btn-principal largura-total" onclick="fazerLogin()">
+      Entrar
+    </button>
+
+    <p>
+      Ainda não possui uma conta?
+      <button class="link" onclick="trocarParaCadastro()">Cadastre-se</button>
+    </p>
+  </div>
+
+</div>
+
+<div class="modal" id="modalCadastro" onclick="fecharAoFora(event,'modalCadastro')">
+
+  <div class="modal-caixa modal-conta">
+    <button class="fechar" onclick="fecharModal('modalCadastro')">×</button>
+
+    <span class="subtitulo">CRIE SUA CONTA</span>
+    <h2>Faça seu cadastro</h2>
+
+    <input id="nomeCadastro" autocomplete="name" maxlength="150" placeholder="Seu nome">
+    <input id="usuarioCadastro" autocomplete="username" maxlength="50" placeholder="Nome de usuário (3 a 50 caracteres)">
+    <input type="email" id="emailCadastro" autocomplete="email" placeholder="Seu e-mail">
+    <input id="cpfCadastro" maxlength="20" placeholder="CPF ou CNPJ">
+    <input id="telefoneCadastro" type="tel" autocomplete="tel" maxlength="20" placeholder="Seu telefone">
+    <input type="password" id="senhaCadastro" autocomplete="new-password" minlength="8" placeholder="Crie uma senha (mínimo 8 caracteres)">
+
+    <button class="btn-principal largura-total" onclick="fazerCadastro()">
+      Cadastrar
+    </button>
+
+    <p>
+      Já possui uma conta?
+      <button class="link" onclick="trocarParaLogin()">Entrar</button>
+    </p>
+  </div>
+
+</div>
+
+<script>
+
+/* SCROLL SUAVE COM LENIS */
+
+const lenis = new Lenis({
+  duration: 1.2,
+  smoothWheel: true,
+  smoothTouch: false,
+  anchors: false
+});
+
+function animarLenis(tempo) {
+  lenis.raf(tempo);
+  requestAnimationFrame(animarLenis);
+}
+
+requestAnimationFrame(animarLenis);
+
+const header = document.querySelector('.header');
+const hero = document.querySelector('.hero');
+
+lenis.on('scroll', ({ scroll }) => {
+  header.classList.toggle('header-scrolled', scroll > 28);
+
+  if (hero) {
+    const progressoHero = Math.min(scroll / Math.max(hero.offsetHeight, 1), 1);
+    hero.style.setProperty('--hero-shift', progressoHero.toFixed(3));
+  }
+});
+
+let usuarioAtual = null;
+
+/* REVEAL NO SCROLL */
+
+const elementosAnimados = document.querySelectorAll(
+  'main [data-reveal], main .secao-topo, main .imovel-card, main .personalizacao-card, main .faixa-personalizacao, main .chat, main .anuncio-convite, main .anunciar-info'
+);
+
+const textosAnimados = document.querySelectorAll(
+  'main section:not(.hero) h2, main section:not(.hero) h3, main section:not(.hero) p'
+);
+
+elementosAnimados.forEach(elemento => elemento.classList.add('reveal-ready'));
+textosAnimados.forEach(texto => texto.classList.add('text-reveal'));
+
+const observadorReveal = new IntersectionObserver((entradas, observer) => {
+  entradas.forEach(entrada => {
+    if (!entrada.isIntersecting) return;
+
+    entrada.target.classList.add('is-visible');
+    observer.unobserve(entrada.target);
+  });
+}, { threshold: 0.14, rootMargin: '0px 0px -45px' });
+
+document.querySelectorAll('.reveal-ready, .text-reveal').forEach(elemento => {
+  observadorReveal.observe(elemento);
+});
+
+function abrirFormularioAnuncio() {
+  if (!usuarioAtual) {
+    alert('Entre na sua conta para anunciar um imóvel.');
+    abrirModal('modalLogin');
+    return;
+  }
+
+  const convite = document.getElementById('anuncioConvite');
+  const formulario = document.getElementById('formAnuncio');
+
+  convite.hidden = true;
+  formulario.hidden = false;
+
+  requestAnimationFrame(() => {
+    lenis.scrollTo(formulario, { offset: -105 });
+  });
+}
+
+function alternarSidebar() {
+  const sidebar = document.getElementById('dashboardSidebar');
+  if (!sidebar) return;
+
+  sidebar.classList.toggle('sidebar-open');
+  document.body.classList.toggle('sidebar-visible', sidebar.classList.contains('sidebar-open'));
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', event => {
+    const destino = document.querySelector(link.getAttribute('href'));
+
+    if (!destino) return;
+
+    event.preventDefault();
+    lenis.scrollTo(destino, { offset: -82 });
+  });
+});
+
+function alternarMenu() {
+  const menu = document.getElementById('menuTela');
+  const botao = document.getElementById('menuBotao');
+
+  menu.classList.toggle('aberto');
+  botao.classList.toggle('ativo');
+
+  botao.setAttribute('aria-expanded', menu.classList.contains('aberto'));
+  document.body.classList.toggle('menu-aberto', menu.classList.contains('aberto'));
+}
+
+function fecharMenu() {
+  document.getElementById('menuTela').classList.remove('aberto');
+  document.getElementById('menuBotao').classList.remove('ativo');
+  document.getElementById('menuBotao').setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('menu-aberto');
+}
+
+
+function abrirModal(id) {
+  document.getElementById(id).classList.add('ativo');
+}
+
+function fecharModal(id) {
+  document.getElementById(id).classList.remove('ativo');
+}
+
+function fecharAoFora(event, id) {
+  if (event.target.id === id) {
+    fecharModal(id);
+  }
+}
+
+function trocarParaCadastro() {
+  fecharModal('modalLogin');
+  abrirModal('modalCadastro');
+}
+
+function trocarParaLogin() {
+  fecharModal('modalCadastro');
+  abrirModal('modalLogin');
+}
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    fecharMenu();
+
+    document.querySelectorAll('.modal.ativo').forEach(modal => {
+      modal.classList.remove('ativo');
+    });
+  }
+});
+
+
+function abrirDetalhes(botao) {
+  const card = botao.closest('.imovel-card');
+
+  document.getElementById('detalheNome').textContent = card.dataset.nome;
+  document.getElementById('detalheLocal').textContent = card.dataset.local;
+  document.getElementById('detalhePreco').textContent = card.dataset.preco;
+  document.getElementById('detalheDescricao').textContent = card.dataset.descricao;
+  document.getElementById('detalheImagem').src = card.querySelector('img').src;
+
+  document.getElementById('detalheCaracteristicas').textContent =
+    `${card.dataset.quartos} quartos · ${card.dataset.banheiros} banheiros · ${card.dataset.vagas} vagas · ${card.dataset.area}`;
+
+  abrirModal('modalDetalhes');
+}
+
+function formatarPreco(valor, finalidade) {
+  const preco = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(valor);
+
+  return finalidade === 'aluguel' ? `${preco}/mês` : preco;
+}
+
+function criarCardImovel(imovel) {
+  const card = document.createElement('article');
+  card.className = 'imovel-card';
+  card.dataset.nome = imovel.title;
+  card.dataset.local = `${imovel.city} - ${imovel.state}`;
+  card.dataset.tipo = imovel.type;
+  card.dataset.negocio = imovel.purpose;
+  card.dataset.preco = formatarPreco(imovel.price, imovel.purpose);
+  card.dataset.quartos = imovel.bedrooms;
+  card.dataset.banheiros = imovel.bathrooms;
+  card.dataset.vagas = imovel.parkingSpaces;
+  card.dataset.area = `${imovel.totalArea} m²`;
+  card.dataset.descricao = imovel.description;
+
+  const foto = document.createElement('div');
+  foto.className = 'imovel-foto';
+  const imagem = document.createElement('img');
+  imagem.src = imovel.image || (imovel.type === 'apartamento'
+    ? 'IMAGENS2/apartamento-brisa.jpg'
+    : 'IMAGENS2/casa-serena.jpg');
+  imagem.alt = imovel.title;
+  const finalidade = document.createElement('span');
+  finalidade.textContent = imovel.purpose === 'aluguel' ? 'ALUGUEL' : 'VENDA';
+  foto.append(imagem, finalidade);
+
+  const dados = document.createElement('div');
+  dados.className = 'imovel-dados';
+  const local = document.createElement('small');
+  local.textContent = card.dataset.local;
+  const titulo = document.createElement('h3');
+  titulo.textContent = imovel.title;
+  const caracteristicas = document.createElement('p');
+  caracteristicas.textContent =
+    `${imovel.bedrooms} quartos · ${imovel.bathrooms} banheiros · ${imovel.parkingSpaces} vagas`;
+
+  const rodape = document.createElement('div');
+  rodape.className = 'imovel-rodape';
+  const preco = document.createElement('strong');
+  preco.textContent = card.dataset.preco;
+  const detalhes = document.createElement('button');
+  detalhes.type = 'button';
+  detalhes.textContent = 'Ver detalhes ↗';
+  detalhes.addEventListener('click', () => abrirDetalhes(detalhes));
+  rodape.append(preco, detalhes);
+  dados.append(local, titulo, caracteristicas, rodape);
+  card.append(foto, dados);
+
+  return card;
+}
+
+function filtrarImoveis() {
+  const busca = document.getElementById('pesquisaImovel').value.trim().toLowerCase();
+  const tipo = document.getElementById('filtroTipo').value;
+  const negocio = document.getElementById('filtroNegocio').value;
+  let encontrados = 0;
+
+  document.querySelectorAll('#listaImoveis .imovel-card').forEach(card => {
+    const texto = `${card.dataset.nome} ${card.dataset.local} ${card.dataset.tipo}`.toLowerCase();
+    const corresponde =
+      texto.includes(busca) &&
+      (tipo === 'todos' || card.dataset.tipo === tipo) &&
+      (negocio === 'todos' || card.dataset.negocio === negocio);
+
+    card.style.display = corresponde ? '' : 'none';
+    if (corresponde) encontrados++;
+  });
+
+  const aviso = document.getElementById('semResultados');
+  aviso.textContent = 'Nenhum imóvel encontrado com esses filtros.';
+  aviso.style.display = encontrados ? 'none' : 'block';
+}
+
+async function requisitarApi(url, opcoes = {}) {
+  const resposta = await fetch(url, { credentials: 'same-origin', ...opcoes });
+  const dados = resposta.status === 204 ? null : await resposta.json();
+  if (!resposta.ok) {
+    throw new Error(dados?.error || 'Não foi possível concluir a operação.');
+  }
+  return dados;
+}
+
+async function carregarImoveis() {
+  const lista = document.getElementById('listaImoveis');
+  const aviso = document.getElementById('semResultados');
+  lista.replaceChildren();
+  aviso.textContent = 'Carregando imóveis...';
+  aviso.style.display = 'block';
+
+  try {
+    const imoveis = await requisitarApi('/api/properties');
+    lista.replaceChildren(...imoveis.map(criarCardImovel));
+    filtrarImoveis();
+  } catch (erro) {
+    aviso.textContent = `Não foi possível carregar os imóveis: ${erro.message}`;
+    aviso.style.display = 'block';
+  }
+}
+
+function atualizarBotaoConta() {
+  const botao = document.querySelector('.btn-entrar');
+  botao.textContent = usuarioAtual ? `Sair (${usuarioAtual.name})` : 'Entrar / Cadastrar';
+  botao.onclick = usuarioAtual ? encerrarSessao : () => abrirModal('modalLogin');
+}
+
+async function fazerCadastro() {
+  try {
+    const resultado = await requisitarApi('/api/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: document.getElementById('nomeCadastro').value.trim(),
+        username: document.getElementById('usuarioCadastro').value.trim(),
+        email: document.getElementById('emailCadastro').value.trim(),
+        cpfCnpj: document.getElementById('cpfCadastro').value.trim(),
+        phone: document.getElementById('telefoneCadastro').value.trim(),
+        password: document.getElementById('senhaCadastro').value
+      })
+    });
+    usuarioAtual = resultado.user;
+    atualizarBotaoConta();
+    fecharModal('modalCadastro');
+    await mostrarAnuncios();
+    alert(`Conta criada. Bem-vindo(a), ${usuarioAtual.name}!`);
+  } catch (erro) {
+    alert(erro.message);
+  }
+}
+
+async function fazerLogin() {
+  try {
+    const resultado = await requisitarApi('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        identifier: document.getElementById('emailLogin').value.trim(),
+        password: document.getElementById('senhaLogin').value
+      })
+    });
+    usuarioAtual = resultado.user;
+    atualizarBotaoConta();
+    fecharModal('modalLogin');
+    await mostrarAnuncios();
+    alert(`Bem-vindo(a), ${usuarioAtual.name}!`);
+  } catch (erro) {
+    alert(erro.message);
+  }
+}
+
+async function encerrarSessao() {
+  try {
+    await requisitarApi('/api/auth/logout', { method: 'POST' });
+    usuarioAtual = null;
+    atualizarBotaoConta();
+    await mostrarAnuncios();
+  } catch (erro) {
+    alert(erro.message);
+  }
+}
+
+function irParaMeusImoveis() {
+  if (!usuarioAtual) {
+    alert('Entre na sua conta para acessar a área de anúncios.');
+    abrirModal('modalLogin');
+    return;
+  }
+
+  lenis.scrollTo(document.getElementById('meus-imoveis'), { offset: -82 });
+}
+
+/* FOTO DO ANÚNCIO */
+
+function preverFoto(event) {
+  const arquivo = event.target.files[0];
+
+  if (!arquivo) return;
+
+  if (!['image/jpeg', 'image/png', 'image/webp'].includes(arquivo.type)) {
+    alert('Escolha uma imagem JPG, PNG ou WebP.');
+    event.target.value = '';
+    return;
+  }
+
+  const preview = document.getElementById('fotoPreview');
+  preview.replaceChildren();
+  const imagem = document.createElement('img');
+  imagem.src = URL.createObjectURL(arquivo);
+  imagem.alt = 'Prévia da foto escolhida';
+  preview.appendChild(imagem);
+}
+
+/* PUBLICAR ANÚNCIO */
+
+document.getElementById('formAnuncio').addEventListener('submit', async function(event) {
+  event.preventDefault();
+
+  if (!usuarioAtual) {
+    alert('Entre na sua conta antes de publicar um imóvel.');
+    abrirModal('modalLogin');
+    return;
+  }
+
+  const dados = new FormData();
+  dados.append('title', document.getElementById('anuncioNome').value.trim());
+  dados.append('city', document.getElementById('anuncioCidade').value.trim());
+  dados.append('state', document.getElementById('anuncioEstado').value.trim());
+  dados.append('cep', document.getElementById('anuncioCep').value.trim());
+  dados.append('address', document.getElementById('anuncioEndereco').value.trim());
+  dados.append('number', document.getElementById('anuncioNumero').value.trim());
+  dados.append('neighborhood', document.getElementById('anuncioBairro').value.trim());
+  dados.append('type', document.getElementById('anuncioTipo').value);
+  dados.append('purpose', document.getElementById('anuncioNegocio').value);
+  dados.append('price', document.getElementById('anuncioPreco').value);
+  dados.append('bedrooms', document.getElementById('anuncioQuartos').value);
+  dados.append('bathrooms', document.getElementById('anuncioBanheiros').value);
+  dados.append('parkingSpaces', document.getElementById('anuncioVagas').value);
+  dados.append('totalArea', document.getElementById('anuncioArea').value);
+  dados.append('description', document.getElementById('anuncioDescricao').value.trim());
+  const foto = document.getElementById('anuncioFoto').files[0];
+  if (foto) dados.append('photo', foto);
+
+  try {
+    await requisitarApi('/api/properties', { method: 'POST', body: dados });
+    const preview = document.querySelector('#fotoPreview img');
+    if (preview) URL.revokeObjectURL(preview.src);
+    this.reset();
+    document.getElementById('fotoPreview').innerHTML =
+      '<span>A prévia da foto aparecerá aqui</span>';
+    await Promise.all([carregarImoveis(), mostrarAnuncios()]);
+    alert('Imóvel publicado com sucesso!');
+  } catch (erro) {
+    alert(erro.message);
+  }
+});
+
+/* MOSTRAR ANÚNCIOS */
+
+async function mostrarAnuncios() {
+  const lista = document.getElementById('listaAnuncios');
+  lista.replaceChildren();
+  if (!usuarioAtual) {
+    const vazio = document.createElement('p');
+    vazio.className = 'vazio-anuncios';
+    vazio.textContent = 'Entre na sua conta para ver seus imóveis publicados.';
+    lista.appendChild(vazio);
+    return;
+  }
+
+  try {
+    const anuncios = await requisitarApi('/api/my/properties');
+    if (!anuncios.length) {
+      const vazio = document.createElement('p');
+      vazio.className = 'vazio-anuncios';
+      vazio.textContent = 'Você ainda não publicou nenhum imóvel.';
+      lista.appendChild(vazio);
+      return;
+    }
+
+    anuncios.forEach(anuncio => {
+      const card = document.createElement('article');
+      card.className = 'anuncio-publicado';
+      const imagem = document.createElement('img');
+      imagem.src = anuncio.image || (anuncio.type === 'apartamento'
+        ? 'IMAGENS2/apartamento-brisa.jpg'
+        : 'IMAGENS2/casa-serena.jpg');
+      imagem.alt = `Foto de ${anuncio.title}`;
+      const info = document.createElement('div');
+      const titulo = document.createElement('h4');
+      titulo.textContent = anuncio.title;
+      const local = document.createElement('p');
+      local.textContent =
+        `${anuncio.city} - ${anuncio.state} · ${anuncio.bedrooms} quartos · ${anuncio.bathrooms} banheiros`;
+      const preco = document.createElement('strong');
+      preco.textContent =
+        `${formatarPreco(anuncio.price, anuncio.purpose)} · ${anuncio.purpose === 'venda' ? 'Venda' : 'Aluguel'}`;
+      info.append(titulo, local, preco);
+      card.append(imagem, info);
+      lista.appendChild(card);
+    });
+  } catch (erro) {
+    const mensagem = document.createElement('p');
+    mensagem.className = 'vazio-anuncios';
+    mensagem.textContent = `Não foi possível carregar seus anúncios: ${erro.message}`;
+    lista.appendChild(mensagem);
+  }
+}
+
+async function inicializarAplicacao() {
+  atualizarBotaoConta();
+  await carregarImoveis();
+  try {
+    const resultado = await requisitarApi('/api/auth/me');
+    usuarioAtual = resultado.user;
+    atualizarBotaoConta();
+    await mostrarAnuncios();
+  } catch (erro) {
+    console.error('Não foi possível recuperar a sessão:', erro);
+  }
+}
+
+inicializarAplicacao();
+
+if (new URLSearchParams(window.location.search).get('auth') === 'login') {
+  abrirModal('modalLogin');
+}
+
+
+function mostrarAviso(nome) {
+  alert(nome + ' é uma funcionalidade demonstrativa da VisionHome.');
+}
+
+
+function adicionarMensagem(texto, classe) {
+  const mensagens = document.getElementById('chatMensagens');
+  const item = document.createElement('div');
+
+  item.className = 'mensagem ' + classe;
+  item.textContent = texto;
+
+  mensagens.appendChild(item);
+  mensagens.scrollTop = mensagens.scrollHeight;
+}
+
+function enviarMensagem() {
+  const campo = document.getElementById('mensagemUsuario');
+  const mensagem = campo.value.trim();
+
+  if (!mensagem) return;
+
+  adicionarMensagem(mensagem, 'usuario-mensagem');
+  campo.value = '';
+
+  setTimeout(() => {
+    const texto = mensagem.toLowerCase();
+    let resposta;
+
+    if (texto.includes('sala')) {
+      resposta = 'Para uma sala aconchegante, experimente tons neutros, iluminação indireta e móveis proporcionais ao espaço. Uma planta também pode trazer vida ao ambiente!';
+    } else if (texto.includes('quarto')) {
+      resposta = 'No quarto, uma paleta tranquila, iluminação confortável e tecidos com texturas diferentes ajudam a criar um ambiente acolhedor.';
+    } else if (texto.includes('cozinha')) {
+      resposta = 'Na cozinha, pense primeiro na circulação e na organização. Armários bem distribuídos e uma boa iluminação fazem bastante diferença.';
+    } else if (texto.includes('cor')) {
+      resposta = 'Você pode escolher uma cor principal e equilibrá-la com tons neutros. Azul suave, bege e terracota, por exemplo, criam uma composição harmoniosa.';
+    } else if (texto.includes('pequeno') || texto.includes('espaço')) {
+      resposta = 'Em espaços menores, móveis multifuncionais, prateleiras e espelhos podem ajudar a aproveitar melhor cada cantinho.';
+    } else if (texto.includes('decor')) {
+      resposta = 'Uma boa forma de começar é definir o estilo que você gosta, escolher uma paleta de cores e depois selecionar os móveis essenciais.';
+    } else {
+      resposta = 'Adorei sua pergunta! Posso sugerir ideias de decoração, combinações de cores, móveis e organização. Me conte um pouco mais sobre o ambiente.';
+    }
+
+    adicionarMensagem(resposta, 'ia-mensagem');
+  }, 650);
+}
+</script>
+
+</body>
+</html>

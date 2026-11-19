@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anunciar imóvel | VisionHome</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.8/dist/lenis.min.js"></script>
+</head>
+<body class="site-page anunciar-page">
+  <header class="header"><a href="index.html" class="marca"><img src="IMAGENS2/logo.png" alt="VisionHome"><span>Vision<span class="marca-destaque">Home</span></span></a><div class="header-acoes"><a class="btn-entrar" href="index.html">Início</a><button class="menu-botao" id="menuBotao" onclick="alternarMenu()" aria-expanded="false"><span>MENU</span><span class="menu-linhas"><i></i><i></i><i></i></span></button></div></header>
+  <nav class="menu-tela" id="menuTela"><div class="menu-tela-conteudo"><span class="menu-legenda">NAVEGUE PELA VISIONHOME</span><a href="index.html" onclick="fecharMenu()"><small>01</small> Início</a><a href="imoveis.html" onclick="fecharMenu()"><small>02</small> Imóveis</a><a href="personalizacao.html" onclick="fecharMenu()"><small>03</small> Personalização</a><a href="vivi.html" onclick="fecharMenu()"><small>04</small> Inteligência artificial</a><a href="anunciar.html" onclick="fecharMenu()"><small>05</small> Anunciar meu imóvel</a></div></nav>
+
+  <main>
+    <section class="page-intro"><a class="page-back" href="index.html">← VOLTAR PARA INÍCIO</a><div class="page-intro-content" data-reveal><span class="subtitulo">SUA ÁREA NA VISIONHOME</span><h1>Seu imóvel merece ser encontrado.</h1><p>Apresente os detalhes do espaço e coloque sua propriedade diante de novas possibilidades.</p></div></section>
+    <section class="page-body"><div class="anunciar-cabecalho" data-reveal><span class="subtitulo">COMECE SEU ANÚNCIO</span><h2>Conte a história do seu espaço.</h2><p>Preencha as informações abaixo. Seu anúncio ficará salvo neste navegador para esta demonstração.</p></div><div class="anunciar-layout"><form class="form-anuncio" id="formAnuncio" data-reveal><div class="form-linha"><label>Nome do imóvel<input id="anuncioNome" required placeholder="Ex.: Casa com jardim"></label><label>Localização<input id="anuncioLocal" required placeholder="Cidade, bairro"></label></div><div class="form-linha"><label>Tipo de imóvel<select id="anuncioTipo"><option value="casa">Casa</option><option value="apartamento">Apartamento</option></select></label><label>Finalidade<select id="anuncioNegocio"><option value="venda">Venda</option><option value="aluguel">Aluguel</option></select></label></div><div class="form-linha tres"><label>Preço<input id="anuncioPreco" required placeholder="Ex.: R$ 500.000"></label><label>Quartos<input id="anuncioQuartos" type="number" min="0" value="2"></label><label>Banheiros<input id="anuncioBanheiros" type="number" min="0" value="1"></label></div><div class="form-linha"><label>Vagas de garagem<input id="anuncioVagas" type="number" min="0" value="1"></label><label>Área (m²)<input id="anuncioArea" required placeholder="Ex.: 120"></label></div><label class="campo-largo">Descrição<textarea id="anuncioDescricao" rows="4" required placeholder="Conte um pouco sobre o imóvel..."></textarea></label><label class="campo-largo">Foto do imóvel<input id="anuncioFoto" type="file" accept="image/jpeg,image/png,image/webp" onchange="preverFoto(event)"></label><div class="foto-preview" id="fotoPreview"><span>A prévia da foto aparecerá aqui</span></div><button class="btn-principal enviar-anuncio" type="submit">Publicar imóvel</button><p class="nota-form">O anúncio será salvo no banco de dados desta demonstração e ficará disponível na busca de imóveis.</p></form><aside class="anunciar-info" data-reveal><div class="mini-casa">⌂</div><h3>Uma boa apresentação faz diferença.</h3><p>Uma foto, uma descrição clara e as informações certas ajudam o próximo morador a reconhecer o potencial do espaço.</p><ul><li>Informações organizadas</li><li>Foto de apresentação</li><li>Características do imóvel</li></ul></aside></div><div class="anuncios-publicados" data-reveal><h3>Seus anúncios publicados</h3><div id="listaAnuncios"><p class="vazio-anuncios">Você ainda não publicou nenhum imóvel.</p></div></div></section>
+  </main>
+  <footer class="footer"><div class="footer-logo-area"><img src="IMAGENS2/logo.png" alt="Logo VisionHome"></div><div class="footer-links"><a href="index.html">Início</a><a href="imoveis.html">Imóveis</a><a href="personalizacao.html">Personalização</a><a href="vivi.html">Vivi</a></div><small>© 2026 VisionHome. Todos os direitos reservados.</small></footer>
+  <script src="site.js"></script>
+  <script>
+    let fotoSelecionada = '';
+
+    function preverFoto(event) {
+      const arquivo = event.target.files[0];
+      if (!arquivo) return;
+      if (!arquivo.type.startsWith('image/')) { alert('Escolha um arquivo de imagem.'); event.target.value = ''; return; }
+      const leitor = new FileReader();
+      leitor.onload = e => {
+        fotoSelecionada = e.target.result;
+        document.getElementById('fotoPreview').innerHTML = `<img src="${fotoSelecionada}" alt="Prévia da foto escolhida">`;
+      };
+      leitor.readAsDataURL(arquivo);
+    }
+
+    document.getElementById('formAnuncio').addEventListener('submit', event => {
+      event.preventDefault();
+      const anuncio = { nome: anuncioNome.value.trim(), local: anuncioLocal.value.trim(), tipo: anuncioTipo.value, negocio: anuncioNegocio.value, preco: anuncioPreco.value.trim(), quartos: anuncioQuartos.value, banheiros: anuncioBanheiros.value, vagas: anuncioVagas.value, area: anuncioArea.value.trim(), descricao: anuncioDescricao.value.trim(), foto: fotoSelecionada };
+      const anuncios = JSON.parse(localStorage.getItem('vhAnuncios') || '[]');
+      anuncios.push(anuncio);
+      try { localStorage.setItem('vhAnuncios', JSON.stringify(anuncios)); } catch (erro) { alert('A foto é muito grande para salvar no navegador.'); return; }
+      event.target.reset(); fotoSelecionada = ''; document.getElementById('fotoPreview').innerHTML = '<span>A prévia da foto aparecerá aqui</span>'; mostrarAnuncios(); alert('Imóvel publicado na demonstração!');
+    });
+
+    function mostrarAnuncios() {
+      const lista = document.getElementById('listaAnuncios');
+      const anuncios = JSON.parse(localStorage.getItem('vhAnuncios') || '[]');
+      lista.innerHTML = anuncios.length ? '' : '<p class="vazio-anuncios">Você ainda não publicou nenhum imóvel.</p>';
+      anuncios.forEach(anuncio => { lista.insertAdjacentHTML('beforeend', `<article class="anuncio-publicado"><img src="${anuncio.foto || 'IMAGENS2/hero.jpg'}" alt="Foto de ${anuncio.nome}"><div><h4>${anuncio.nome}</h4><p>${anuncio.local} · ${anuncio.quartos} quartos · ${anuncio.banheiros} banheiros</p><strong>${anuncio.preco} · ${anuncio.negocio === 'venda' ? 'Venda' : 'Aluguel'}</strong></div></article>`); });
+    }
+
+    mostrarAnuncios();
+  </script>
+</body>
+</html>
